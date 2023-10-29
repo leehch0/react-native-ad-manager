@@ -39,7 +39,6 @@ public class RNAdManagerAdaptiveBannerViewManager extends ViewGroupManager<Adapt
     public static final String EVENT_AD_OPENED = "onAdOpened";
     public static final String EVENT_AD_CLOSED = "onAdClosed";
     public static final String EVENT_APP_EVENT = "onAppEvent";
-    public static final String EVENT_AD_RECORD_IMPRESSION = "onAdRecordImpression";
 
     public static final int COMMAND_LOAD_BANNER = 1;
     private final ReactApplicationContext applicationContext;
@@ -85,8 +84,7 @@ public class RNAdManagerAdaptiveBannerViewManager extends ViewGroupManager<Adapt
             EVENT_AD_FAILED_TO_LOAD,
             EVENT_AD_OPENED,
             EVENT_AD_CLOSED,
-            EVENT_APP_EVENT,
-            EVENT_AD_RECORD_IMPRESSION
+            EVENT_APP_EVENT
         };
         for (String event : events) {
             builder.put(event, MapBuilder.of("registrationName", event));

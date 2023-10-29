@@ -35,6 +35,7 @@ public class RNAdManagerNativeViewManager extends ViewGroupManager<NativeAdViewC
     public static final String PROP_VALID_AD_SIZES = "validAdSizes";
     public static final String PROP_VALID_AD_TYPES = "validAdTypes";
     public static final String PROP_TARGETING = "targeting";
+    public static final String PROP_THEME = "theme";
     public static final String PROP_CORRELATOR = "correlator";
 
     public static final String EVENT_AD_LOADED = "onAdLoaded";
@@ -45,7 +46,6 @@ public class RNAdManagerNativeViewManager extends ViewGroupManager<NativeAdViewC
     public static final String EVENT_AD_CLICKED = "onAdClicked";
     public static final String EVENT_AD_CUSTOM_CLICK = "onAdCustomClick";
     public static final String EVENT_APP_EVENT = "onAppEvent";
-    public static final String EVENT_AD_RECORD_IMPRESSION = "onAdRecordImpression";
     public static final int COMMAND_RELOAD_AD = 1;
 
     private static final String REACT_CLASS = "CTKAdManageNative";
@@ -106,8 +106,7 @@ public class RNAdManagerNativeViewManager extends ViewGroupManager<NativeAdViewC
             EVENT_AD_CLOSED,
             EVENT_AD_CLICKED,
             EVENT_AD_CUSTOM_CLICK,
-            EVENT_APP_EVENT,
-            EVENT_AD_RECORD_IMPRESSION
+            EVENT_APP_EVENT
         };
         for (int i = 0; i < events.length; i++) {
             builder.put(events[i], MapBuilder.of("registrationName", events[i]));
@@ -125,6 +124,7 @@ public class RNAdManagerNativeViewManager extends ViewGroupManager<NativeAdViewC
 
     @ReactProp(name = PROP_AD_SIZE)
     public void setPropAdSize(final NativeAdViewContainer view, final String sizeString) {
+        Log.i("AdManager - setPropAdSize", sizeString);
         AdSize adSize = AdSizeUtil.getAdSizeFromString(sizeString);
         view.setAdSize(adSize);
     }
@@ -207,6 +207,12 @@ public class RNAdManagerNativeViewManager extends ViewGroupManager<NativeAdViewC
                 }
             }
         }
+    }
+
+    @ReactProp(name = PROP_THEME)
+    public void setPropTheme(final NativeAdViewContainer view, final String theme) {
+        Log.i("AdManager - setPropTheme", theme);
+        view.setTheme(theme);
     }
 
     @ReactProp(name = PROP_CORRELATOR)

@@ -38,6 +38,8 @@ type TAdManagerInterstitialHandler = (
   event: Error | IAdManagerEventBase | IAdManagerEventLoadedInterstitial
 ) => void;
 
+// type CommunityTheme = 'dark' | 'light';
+
 const _subscriptions = new Map();
 
 const addEventListener = (
@@ -88,6 +90,10 @@ const removeAllListeners = () => {
 };
 
 const simulatorId = 'SIMULATOR';
+
+// const setTheme = (theme: CommunityTheme) => {
+//   CTKInterstitial.setTheme(theme);
+// }
 
 const setAdUnitID = (adUnitID: string) => {
   CTKInterstitial.setAdUnitID(adUnitID);

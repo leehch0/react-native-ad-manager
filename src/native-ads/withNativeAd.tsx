@@ -37,6 +37,7 @@ interface INativeAdPropsBase extends ViewProps {
   validAdTypes?: ('banner' | 'native' | 'template')[];
   customClickTemplateIds?: string[];
   targeting?: IAdManagerTargeting;
+  theme: 'dark' | 'light';
 }
 
 interface INativeAdNativeProps extends INativeAdPropsBase {
@@ -60,7 +61,6 @@ interface INativeAdNativeProps extends INativeAdPropsBase {
   onAdCustomClick?: (
     event: NativeSyntheticEvent<IAdManagerEventCustomClick>
   ) => void;
-  onAdRecordImpression?: (event: NativeSyntheticEvent<IAdManagerEventBase>) => void;
 }
 
 interface INativeAdProps extends INativeAdPropsBase {
@@ -78,7 +78,6 @@ interface INativeAdProps extends INativeAdPropsBase {
   onAdOpened?: (event: IAdManagerEventBase) => void;
   onAdClosed?: (event: IAdManagerEventBase) => void;
   onAdCustomClick?: (event: IAdManagerEventCustomClick) => void;
-  onAdRecordImpression?: (event: IAdManagerEventBase) => void;
 }
 
 interface INativeAdState {
@@ -128,10 +127,12 @@ export default (Component: JSXElementConstructor<any>) =>
         clickableChildren: new Set(),
         style: {},
       };
+      console.log('theme....', this.props.theme)
     }
 
     componentDidMount() {
       this.reloadAd();
+      console.log('didmount')
     }
 
     registerClickableChild = (child: TReactNodeHandleRef) => {
@@ -254,6 +255,7 @@ export default (Component: JSXElementConstructor<any>) =>
           customTemplateIds={this.props.customTemplateIds}
           validAdSizes={this.props.validAdSizes}
           validAdTypes={this.props.validAdTypes}
+          theme={this.props.theme}
           onSizeChange={this.handleSizeChange}
           onAdLoaded={this.handleAdLoaded}
           onAdFailedToLoad={(event) =>
@@ -274,9 +276,6 @@ export default (Component: JSXElementConstructor<any>) =>
           onAdCustomClick={(event) =>
             this.props.onAdCustomClick &&
             this.props.onAdCustomClick(event.nativeEvent)
-          }
-          onAdRecordImpression={(event) =>
-            this.props.onAdRecordImpression && this.props.onAdRecordImpression(event.nativeEvent)
           }
           targeting={this.props.targeting}
           customClickTemplateIds={this.props.customClickTemplateIds}

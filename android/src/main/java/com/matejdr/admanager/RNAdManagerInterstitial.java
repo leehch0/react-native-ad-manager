@@ -55,6 +55,7 @@ public class RNAdManagerInterstitial extends ReactContextBaseJavaModule {
     String publisherProvidedID;
     Location location;
 
+    String theme;
     String adUnitId;
     AdManagerAdRequest adRequest;
     ReactApplicationContext reactContext;
@@ -74,6 +75,13 @@ public class RNAdManagerInterstitial extends ReactContextBaseJavaModule {
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
         getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
+    }
+
+    @ReactMethod
+    public void setTheme(String theme) {
+        if (theme == null) {
+            this.theme = theme;
+        }
     }
 
     @ReactMethod
@@ -197,7 +205,7 @@ public class RNAdManagerInterstitial extends ReactContextBaseJavaModule {
             adRequestBuilder.setPublisherProvidedId(publisherProvidedID);
         }
         if (location != null) {
-            adRequestBuilder.setLocation(location);
+            // adRequestBuilder.setLocation(location);
         }
 
         adRequest = adRequestBuilder.build();
@@ -319,11 +327,11 @@ public class RNAdManagerInterstitial extends ReactContextBaseJavaModule {
      // Required for rn built in EventEmitter Calls.
      @ReactMethod
      public void addListener(String eventName) {
- 
+
      }
- 
+
      @ReactMethod
      public void removeListeners(Integer count) {
- 
+
      }
 }
